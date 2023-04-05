@@ -1,0 +1,61 @@
+## Find and Open
+About  The Challenge :
+	
+	
+	
+FindAndOpen						 | 200 points
+
+
+Tags: picoCTF 2023Forensics
+
+AUTHOR: MUBARAK MIKAIL
+
+Description
+Someone might have hidden the password in the trace file.Find the key to unlock this file. This tracefile might be good to analyze.
+
+
+
+
+
+
+Solution :-
+
+
+First  analyze the dump.pcap via wireshark
+
+	chmod +x 644 dump.pcap 
+						wireshark dump.pcap
+						
+						
+						
+						 
+							
+
+			
+						
+
+ It says the secret  is our flag 
+
+
+
+At 48	24.240874	50:4a:47:54:46:52	41:41:42:42:48:48	0x4c4b	70	Ethernet II  we find a base encoded string so let's decode this 
+
+  (kali㉿kali)-[~/ctf-p]
+└─$ echo "VGhpcyBpcyB0aGUgc2VjcmV0OiBwaWNvQ1RGe1IzNERJTkdfTE9LZF8=" | base64 -d 
+This is the secret: picoCTF{R34DING_LOKd_                                                                                          
+┌──(kali㉿kali)-[~/ctf-p]
+└─$ 
+
+Now we have our secret   ie our password for zip file . Let's unzip the flag.unzip
+
+┌──(kali㉿kali)-[~/ctf-p]
+└─$ unzip flag.zip 
+Archive:  flag.zip
+[flag.zip] flag password: 
+ extracting: flag                    
+                                                                                          
+┌──(kali㉿kali)-[~/ctf-p]
+└─$ cat flag
+picoCTF{R34DING_LOKd_fil56_succ3ss_0f2afb1a}
+
+
